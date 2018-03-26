@@ -38,4 +38,9 @@ public class VoteService
 	{
 		voteRepository.delete(id);
 	}
+	
+	public void deleteListOfVotes(List<Vote> votes)
+	{
+		voteRepository.delete(votes);
+	}
 }
