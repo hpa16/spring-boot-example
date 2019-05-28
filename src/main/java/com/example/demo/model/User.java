@@ -58,12 +58,12 @@ public class User
 
 	@OrderBy("createdDate")
 	@JsonView(View.UserQuestions.class)
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "user")
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "user", orphanRemoval = true)
 	private Set<Question> questions = new HashSet<Question>();
 
 	@OrderBy("createdDate")
 	@JsonView(View.UserComplete.class)
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "user")
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "user", orphanRemoval = true)
 	private Set<Answer> answers = new HashSet<Answer>();
 
 	public User()

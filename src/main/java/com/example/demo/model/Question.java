@@ -114,9 +114,9 @@ public class Question
 		this.text = text;
 	}
 
-	public Date getCreatedDate()
+	public String getCreatedDate()
 	{
-		return createdDate;
+		return createdDate.toString();
 	}
 
 	public void setCreatedDate(Date createdDate)
@@ -124,9 +124,9 @@ public class Question
 		this.createdDate = createdDate;
 	}
 
-	public Date getModifiedDate()
+	public String getModifiedDate()
 	{
-		return modifiedDate;
+		return modifiedDate.toString();
 	}
 
 	public void setModifiedDate(Date modifiedDate)

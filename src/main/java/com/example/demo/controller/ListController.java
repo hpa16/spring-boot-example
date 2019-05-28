@@ -81,7 +81,6 @@ public class ListController
 				Question question = questionTag.getQuestion();
 				String result = mapper.writerWithView(View.QuestionExtended.class).writeValueAsString(question);
 				JsonNode child = mapper.readTree(result);
-				//((ObjectNode) root).set(question.getCreatedDate().toString(), child);
 				((ObjectNode) root).set(question.getId() + "", child);
 			}
 		}
@@ -95,14 +94,17 @@ public class ListController
 				u -> !sessionRegistry.getAllSessions(u, false).isEmpty()).map(Object::toString).collect(
 						Collectors.toList());
 		JsonNode rootNode = mapper.createObjectNode();
+		String json = null;
 		for (int i = 0; i < userDetails.size(); ++i)
 		{
 			User user = userService.findUserByEmail(userDetails.get(i).split("Username: ")[1].split(";")[0]);
+			if (user.equals(null))
+				return json;
 			String temp = mapper.writerWithView(View.Base.class).writeValueAsString(user);
 			JsonNode userNode = mapper.readTree(temp);
 			((ObjectNode) rootNode).set("User " + (i + 1), userNode);
 		}
-		String json = rootNode.toString();
+		json = rootNode.toString();
 		return json;
 	}
 }

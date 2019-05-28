@@ -33,17 +33,18 @@ public class DeleteController
 	{
 		User user = userService.findUser(user_id);
 		
+		//"Anonymous" account inserted for email "doesnotexist@anonymous.com"
 		user.getQuestions().forEach(question -> question.setUser(userService.findUserByEmail("doesnotexist@anonymous.com")));
 		user.getAnswers().forEach(answer -> answer.setUser(userService.findUserByEmail("doesnotexist@anonymous.com")));
-		
+
 		commentService.deleteListOfComments(commentService.findCommentsByUser(user));
 		voteService.deleteListOfVotes(voteService.findVotesByUser(user));
-		
+
 		user.setQuestions(null);
 		user.setAnswers(null);
-		
+
 		userService.deleteUser(user_id);
-		
+		//Automatically logout or revoke authentication
 		return ("User " + user_id + " Account Deleted");
 	}
 
